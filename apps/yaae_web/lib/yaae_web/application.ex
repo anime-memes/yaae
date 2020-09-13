@@ -7,8 +7,6 @@ defmodule YaaeWeb.Application do
 
   def start(_type, _args) do
     children = [
-      # Start the Telemetry supervisor
-      YaaeWeb.Telemetry,
       # Start the Endpoint (http/https)
       YaaeWeb.Endpoint
       # Start a worker by calling: YaaeWeb.Worker.start_link(arg)

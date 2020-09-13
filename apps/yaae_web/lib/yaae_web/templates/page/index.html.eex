@@ -1,38 +1,50 @@
-<section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
-  <p>Peace of mind from prototype to production</p>
-</section>
+<h1>This is yet another Awesome Elixir list</h1>
 
-<section class="row">
-  <article class="column">
-    <h2>Resources</h2>
-    <ul>
-      <li>
-        <a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix/blob/v1.5/CHANGELOG.md">v1.5 Changelog</a>
-      </li>
-    </ul>
-  </article>
-  <article class="column">
-    <h2>Help</h2>
-    <ul>
-      <li>
-        <a href="https://elixirforum.com/c/phoenix-forum">Forum</a>
-      </li>
-      <li>
-        <a href="https://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on Freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">Twitter @elixirphoenix</a>
-      </li>
-      <li>
-        <a href="https://elixir-slackin.herokuapp.com/">Elixir on Slack</a>
-      </li>
-    </ul>
-  </article>
-</section>
+<div class="star-links">
+  <span class="star-link"><%= link "All", to: Routes.page_path(@conn, :index) %></span>
+  <span class="star-link"><%= link ">= 10⭐", to: Routes.page_path(@conn, :index, %{stars: 10}) %></span>
+  <span class="star-link"><%= link ">= 50⭐", to: Routes.page_path(@conn, :index, %{stars: 50}) %></span>
+</div>
+
+<h2>Categories</h2>
+<ul>
+  <%= for category <- records_categories(@records) do %>
+    <li><%= link category, to: "##{Recase.to_kebab(category)}" %></li>
+  <% end %>
+</ul>
+
+<ul>
+  <%= for {category, records} <- grouped_records(@records) do %>
+    <h2 id="<%= Recase.to_kebab(category) %>"><%= category %></h2>
+    <table style="width: 100%;">
+      <colgroup>
+       <col style="width: 15%;">
+       <col style="width: 60%;">
+       <col style="width: 15%;">
+       <col style="width: 15%;">
+      </colgroup>
+      <thead>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+      </thead>
+      <tbody>
+        <%= for record <- records do %>
+          <tr>
+            <td>
+              <%= link record.repo, to: "https://github.com/#{record.owner}/#{record.repo}", target: "_blank" %>
+            </td>
+            <td><%= record.description %></td>
+            <td>
+              <%= record.stars_count %>⭐
+            </td>
+            <td>
+              <%= record.days_since_last_commit %>🗓
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</ul>
