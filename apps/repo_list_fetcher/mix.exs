@@ -1,9 +1,9 @@
-defmodule GithubFetcher.MixProject do
+defmodule RepoListFetcher.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :github_fetcher,
+      app: :repo_list_fetcher,
       version: "0.1.0",
       build_path: "../../_build",
       config_path: "../../config/config.exs",
@@ -25,8 +25,9 @@ defmodule GithubFetcher.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:jason, "~> 1.0"},
       {:tentacat, "~> 2.1.0"},
-      {:sched_ex, "~> 1.1.1"}
+      {:timex, "~> 3.5"}
     ]
   end
 end
