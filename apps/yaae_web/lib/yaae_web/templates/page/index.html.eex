@@ -33,7 +33,7 @@
         <%= for record <- records do %>
           <tr>
             <td>
-              <%= link record.repo, to: "https://github.com/#{record.owner}/#{record.repo}", target: "_blank" %>
+              <%= link record.repo, to: "https://#{record.platform}.com/#{record.owner}/#{record.repo}", target: "_blank" %>
             </td>
             <td><%= record.description %></td>
             <td>

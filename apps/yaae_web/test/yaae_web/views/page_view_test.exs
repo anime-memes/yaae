@@ -3,56 +3,64 @@ defmodule YaaeWeb.PageViewTest do
 
   import Phoenix.View
 
-  alias GithubFetcher.Result
+  alias RepoListFetcher.RepoListItem
 
   setup do
     records = [
-      %Result{
+      %RepoListItem{
         category: "category1",
         owner: "owner1",
         repo: "repo1",
         description: "description1",
         stars_count: 10,
-        days_since_last_commit: 1
+        days_since_last_commit: 1,
+        platform: "github"
       },
-      %Result{
+      %RepoListItem{
         category: "category2",
         owner: "owner2",
         repo: "repo2",
         description: "description2",
         stars_count: 20,
-        days_since_last_commit: 2
+        days_since_last_commit: 2,
+        platform: "github"
       },
-      %Result{
+      %RepoListItem{
         category: "category2",
         owner: "owner3",
         repo: "repo3",
         description: "description3",
         stars_count: 30,
-        days_since_last_commit: 3
+        days_since_last_commit: 3,
+        platform: "github"
       },
-      %Result{
+      %RepoListItem{
         category: "category3",
         owner: "owner4",
         repo: "repo4",
         description: "description4",
         stars_count: 40,
-        days_since_last_commit: 4
+        days_since_last_commit: 4,
+        platform: "github"
       },
-      %Result{
+      %RepoListItem{
         category: "category1",
         owner: "owner5",
         repo: "repo5",
         description: "description5",
         stars_count: 50,
-        days_since_last_commit: 5
+        days_since_last_commit: 5,
+        platform: "github"
       }
     ]
 
     {:ok, records: records}
   end
 
-  test "renders index.html with every category and repo info from passed to template records", %{conn: conn, records: records} do
+  test "renders index.html with every category and repo info from passed to template records", %{
+    conn: conn,
+    records: records
+  } do
     content = render_to_string(YaaeWeb.PageView, "index.html", conn: conn, records: records)
 
     for record <- records do

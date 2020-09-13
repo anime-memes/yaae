@@ -17,3 +17,6 @@ config :yaae_web, YaaeWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+config :repo_list_fetcher,
+  platforms: [RepoListFetcher.Fetchers.Test]
