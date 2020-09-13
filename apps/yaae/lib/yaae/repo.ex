@@ -2,8 +2,17 @@ defmodule Yaae.Repo do
   @hostname Application.get_env(:yaae, :hostname)
   @db_name Application.get_env(:yaae, :db_name)
 
+  alias RepoListFetcher.RepoListItem
+
   def start_link(_) do
     Redix.start_link(@hostname, name: @db_name)
+  end
+
+  def keys do
+    case Redix.command(@db_name, ["KEYS", "*"]) do
+      {:ok, keys} when is_list(keys) -> Enum.sort(keys)
+      _ -> []
+    end
   end
 
   def set(key, value) do
@@ -14,10 +23,10 @@ defmodule Yaae.Repo do
   def get(key) do
     case Redix.command(@db_name, ["GET", key]) do
       {:ok, value} when not is_nil(value) ->
-        Jason.decode(value)
+        struct(RepoListItem, Jason.decode!(value, keys: :atoms))
 
       _ ->
-        {:ok, nil}
+        nil
     end
   end
 

@@ -36,7 +36,7 @@ defmodule YaaeWeb.PageControllerTest do
         }
       ]
 
-      Enum.each(records, &Records.create(&1))
+      Enum.each(records, &Records.insert(&1))
       on_exit(&Records.destroy_all/0)
 
       {:ok, conn: conn, records: records}

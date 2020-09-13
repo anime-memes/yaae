@@ -6,6 +6,10 @@ defmodule Yaae.Application do
   def start(_type, _args) do
     children = [
       Yaae.Repo,
+      %{
+        id: "cache_updater",
+        start: {SchedEx, :run_every, [Yaae.CacheUpdater, :run, [], "0 0 * * *"]}
+      },
       {Phoenix.PubSub, name: Yaae.PubSub}
     ]
 

@@ -37,10 +37,10 @@ defmodule Yaae.MixProject do
   defp deps do
     [
       {:phoenix_pubsub, "~> 2.0"},
-      {:ecto_sql, "~> 3.4"},
-      {:postgrex, ">= 0.0.0"},
       {:jason, "~> 1.0"},
-      {:redix, "~> 0.11.2"}
+      {:sched_ex, "~> 1.1.1"},
+      {:redix, "~> 0.11.2"},
+      {:repo_list_fetcher, in_umbrella: true}
     ]
   end
 
@@ -49,10 +49,7 @@ defmodule Yaae.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "ecto.setup"],
-      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-      "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
+      setup: ["deps.get", "run priv/repo/seeds.exs"]
     ]
   end
 end
