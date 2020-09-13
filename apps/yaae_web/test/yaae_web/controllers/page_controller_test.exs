@@ -66,7 +66,6 @@ defmodule YaaeWeb.PageControllerTest do
         if stars_count >= 50 do
           assert String.contains?(conn.resp_body, record.category)
           assert String.contains?(conn.resp_body, record.repo)
-
         else
           refute String.contains?(conn.resp_body, record.category)
           refute String.contains?(conn.resp_body, record.repo)

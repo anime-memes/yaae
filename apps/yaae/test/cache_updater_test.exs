@@ -4,7 +4,7 @@ defmodule Yaae.CacheUpdaterTest do
   defmodule TestTimeScale do
     def now(_), do: Timex.now()
 
-    def speedup, do: 86400
+    def speedup, do: 86_400
   end
 
   test "run/1 updates database every day at 00:00" do

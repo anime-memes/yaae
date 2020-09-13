@@ -12,11 +12,14 @@ defmodule Yaae.RecordsTest do
       {:ok, records: records}
     end
 
-    test "get_all/0 fetches all the records and sorts them in alphabetical order using repo names", %{records: records} do
+    test "get_all/0 fetches all the records and sorts them in alphabetical order using repo names",
+         %{records: records} do
       assert Yaae.Records.get_all() == records
     end
 
-    test "get_by_stars/1 fetches only those records that have required stars_count", %{records: records} do
+    test "get_by_stars/1 fetches only those records that have required stars_count", %{
+      records: records
+    } do
       filtered_records = Yaae.Records.get_by_stars(50)
 
       refute records == filtered_records
@@ -32,7 +35,7 @@ defmodule Yaae.RecordsTest do
     test "create/1 inserts new record into database using correct key" do
       old_values = Yaae.Records.get_all()
 
-      record = %RepoListItem{owner: "owner", repo: "repo", platform: "github" }
+      record = %RepoListItem{owner: "owner", repo: "repo", platform: "github"}
       Yaae.Records.insert(record)
 
       assert length(Yaae.Records.get_all()) == length(old_values) + 1

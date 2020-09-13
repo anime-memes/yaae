@@ -14,7 +14,8 @@ defmodule Yaae.RepoTest do
     end
 
     test "keys/0 returns sorted list containing every key", %{records: records} do
-      records_keys = Enum.map(records, fn record -> "#{record.platform}/#{record.owner}/#{record.repo}" end)
+      records_keys =
+        Enum.map(records, fn record -> "#{record.platform}/#{record.owner}/#{record.repo}" end)
 
       assert Yaae.Repo.keys() == records_keys
     end

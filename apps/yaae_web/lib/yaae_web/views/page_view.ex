@@ -1,7 +1,9 @@
 defmodule YaaeWeb.PageView do
   use YaaeWeb, :view
 
-  def records_categories(records), do: records |> Enum.map(& &1.category) |> Enum.uniq()
+  def records_categories(records),
+    do: records |> Enum.map(& &1.category) |> Enum.uniq() |> Enum.sort()
 
-  def grouped_records(records), do: Enum.group_by(records, & &1.category)
+  def grouped_records(records),
+    do: Enum.group_by(records, & &1.category) |> Enum.sort_by(fn {key, _} -> key end)
 end
