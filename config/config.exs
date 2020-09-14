@@ -35,6 +35,7 @@ config :phoenix, :json_library, Jason
 
 config :repo_list_fetcher,
   platforms: [RepoListFetcher.Fetchers.Github],
+  github_endpoint: "https://api.github.com/"
 
 config :tentacat,
   pagination: :none

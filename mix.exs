@@ -34,7 +34,6 @@ defmodule Yaae.Umbrella.MixProject do
     [
       {:excoveralls, "~> 0.13.1", only: :test},
       {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
-      {:ex_doc, "~> 0.22.2", only: :dev, runtime: false},
       {:dialyxir, "~> 1.0.0", only: :dev, runtime: false}
     ]
   end

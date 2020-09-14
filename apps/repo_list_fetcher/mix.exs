@@ -18,7 +18,8 @@ defmodule RepoListFetcher.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger]
+      extra_applications: [:logger],
+      mod: {RepoListFetcher.Application, {}}
     ]
   end
 
@@ -27,7 +28,10 @@ defmodule RepoListFetcher.MixProject do
     [
       {:jason, "~> 1.0"},
       {:tentacat, "~> 2.1.0"},
-      {:timex, "~> 3.5"}
+      {:timex, "~> 3.5"},
+      {:earmark, "~> 1.4.10"},
+      {:meeseeks, "~> 0.15.1"},
+      {:mock, "~> 0.3.0", only: :test}
     ]
   end
 end

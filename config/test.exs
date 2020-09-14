@@ -19,4 +19,5 @@ config :yaae_web, YaaeWeb.Endpoint,
 config :logger, level: :warn
 
 config :repo_list_fetcher,
-  platforms: [RepoListFetcher.Fetchers.Test]
+  platforms: [RepoListFetcher.Fetchers.Test],
+  github_endpoint: "http://localhost:4000/"
