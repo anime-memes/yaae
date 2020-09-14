@@ -60,7 +60,7 @@ defmodule YaaeWeb.PageControllerTest do
       conn: conn,
       records: records
     } do
-      conn = get(conn, "/", %{"stars" => 50})
+      conn = get(conn, "/", %{"min_stars" => 50})
 
       for %{stars_count: stars_count} = record <- records do
         if stars_count >= 50 do

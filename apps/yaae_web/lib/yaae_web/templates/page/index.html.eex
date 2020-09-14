@@ -2,9 +2,9 @@
 
 <div class="star-links">
   <span class="star-link"><%= link "All", to: Routes.page_path(@conn, :index) %></span>
-  <span class="star-link"><%= link ">= 10⭐", to: Routes.page_path(@conn, :index, %{stars: 10}) %></span>
-  <span class="star-link"><%= link ">= 50⭐", to: Routes.page_path(@conn, :index, %{stars: 50}) %></span>
-  <span class="star-link"><%= link ">= 100⭐", to: Routes.page_path(@conn, :index, %{stars: 100}) %></span>
+  <span class="star-link"><%= link ">= 10⭐", to: Routes.page_path(@conn, :index, %{min_stars: 10}) %></span>
+  <span class="star-link"><%= link ">= 50⭐", to: Routes.page_path(@conn, :index, %{min_stars: 50}) %></span>
+  <span class="star-link"><%= link ">= 100⭐", to: Routes.page_path(@conn, :index, %{min_stars: 100}) %></span>
 </div>
 
 <h2>Categories</h2>

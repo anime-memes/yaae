@@ -3,7 +3,7 @@ defmodule YaaeWeb.PageController do
 
   alias Yaae.Records
 
-  def index(conn, %{"stars" => stars}) do
+  def index(conn, %{"min_stars" => stars}) do
     render(conn, "index.html", records: Records.get_by_stars(String.to_integer(stars)))
   end
 
