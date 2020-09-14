@@ -1,8 +1,17 @@
 defmodule RepoListFetcher.Fetchers.Github do
+  @moduledoc """
+  Github fetcher
+
+  Fetching data from Github API performs using Tasks
+  """
   @behaviour RepoListFetcher.Fetchers.Fetcher
 
   alias RepoListFetcher.Fetchers.Github.{AdditionalInfo, Readme}
 
+  @doc """
+  Parses README.md from github repository to build list of RepoListItems and
+  creates tasks that get stars count and commit date info for every item
+  """
   def get_actual_list do
     Readme.parse()
     |> Enum.map(&get_additional_info/1)
@@ -14,6 +23,7 @@ defmodule RepoListFetcher.Fetchers.Github do
     end)
   end
 
+  # Creates task that is not linked to caller and instead is supervised by Task.Supervisor
   defp get_additional_info(item) do
     Task.Supervisor.async_nolink(
       RepoListFetcher.TaskSupervisor,

@@ -1,4 +1,8 @@
 defmodule RepoListFetcher.Fetchers.Github.Readme do
+  @moduledoc """
+  Fetches and parses README.md from awesome-elixir repository
+  """
+
   import Meeseeks.CSS
   import RepoListFetcher.Fetchers.Github.Client
 
@@ -12,6 +16,10 @@ defmodule RepoListFetcher.Fetchers.Github.Readme do
     get_readme() |> get_repos()
   end
 
+  @doc """
+  Performs a request to Github API (`/repos/owner/repo/contents`) to get README.md contents.
+  Response is encoded with Base64, so we decode it and convert to html for easier parsing
+  """
   def get_readme do
     case Tentacat.Repositories.Contents.content(
            client_with_token(),
@@ -30,6 +38,20 @@ defmodule RepoListFetcher.Fetchers.Github.Readme do
     end
   end
 
+  @doc """
+  Uses Meeseeks to look for categories and repositories by CSS selectors.
+
+  First item of the first <ul> contains another <ul> with categories, so we get every item of that second <ul> and fetch their text
+
+  Repos under categories have this structure:
+    ```
+    <h2>Category name</h2>
+    <p>Category description</p>
+    <ul>List of repositories</ul>
+    ```
+  So we get every <ul> (its index in overall list matches the category index), drop the last 10 (these are links after repositories)
+  and build list of RepoListItem for every category
+  """
   def get_repos(nil), do: []
 
   def get_repos(html_string) do
@@ -48,6 +70,10 @@ defmodule RepoListFetcher.Fetchers.Github.Readme do
     build_repos_list(categories, repos, []) |> Enum.reject(&is_nil/1)
   end
 
+  # Right now we can set only owner name, repo name, github link and description.
+  # Github link is located in `href` attribute of <a> (there may be non github link - such repositories are ignored).
+  # Owner name and repo name located in github link.
+  # Description is in the text.
   defp build_repos_list([], [], result_list), do: List.flatten(result_list)
 
   defp build_repos_list([category | category_tail], [repos | repos_tail], result) do

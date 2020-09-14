@@ -1,4 +1,8 @@
 defmodule Yaae.Repo do
+  @moduledoc """
+  Redis cache
+  """
+
   @hostname Application.get_env(:yaae, :hostname)
   @db_name Application.get_env(:yaae, :db_name)
 
